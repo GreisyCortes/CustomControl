@@ -1,0 +1,7 @@
+mx/com/gm/servicio/PersonaService.class
+mx/com/gm/web/WebConfig.class
+mx/com/gm/HolaSpringApplication.class
+mx/com/gm/dao/IPersonaDao.class
+mx/com/gm/servicio/PersonaServiceImpl.class
+mx/com/gm/domain/Persona.class
+mx/com/gm/web/ControladorInicio.class
