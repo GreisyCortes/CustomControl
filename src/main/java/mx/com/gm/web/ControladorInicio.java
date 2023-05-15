@@ -8,6 +8,11 @@ import lombok.extern.slf4j.Slf4j;
 import mx.com.gm.domain.Persona;
 import mx.com.gm.servicio.PersonaService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.authentication.AnonymousAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.Errors;
@@ -22,7 +27,7 @@ public class ControladorInicio {
     private PersonaService personaService;
 
     @GetMapping("/")
-    public String inicio(Model model) {
+    public String inicio(Model model, @AuthenticationPrincipal User user) {
         //list<Personas> persona = personaDao.findAll();
 
         List<Persona> personas = new ArrayList();
@@ -30,6 +35,7 @@ public class ControladorInicio {
 
         personas.addAll((Collection<? extends Persona>) personaService.listarPersonas());
         log.info("ejecutando el controlador Spring MVC");
+        log.info("usuario que se logueo:"+user);
         model.addAttribute("personas", personas);
         return "index";
     }

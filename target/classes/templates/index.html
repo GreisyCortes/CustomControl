@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <title>[[#{pagina.titulo}]]</title>
         <meta charset="UTF-8">
@@ -8,7 +9,7 @@
         
         <header th:replace="layout/plantilla :: header"/>
         
-        <a th:href="@{/agregar}" >[[#{persona.crear}]]</a>
+        <a sec:authorize="hasRole('ROLE_ADMIN')" th:href="@{/agregar}" >[[#{persona.crear}]]</a>
         <!--<p th:text="${mensaje}"></p>
         <p th:text="${saludo}"></p>-->
         <div th:if="${personas != null and !personas.empty}">
@@ -25,8 +26,8 @@
                     <td th:text="${persona.apellido}">Mostrar Apellido</td>
                     <td th:text="${persona.email}">Mostrar Email</td>
                     <td th:text="${persona.numero}">Mostrar Numero</td>
-                    <td><a th:href="@{/editar/} + ${persona.id_persona}">[[ #{accion.editar} ]]</td>
-                    <td><a th:href="@{/eliminar(id_persona=${persona.id_persona})}">[[ #{accion.eliminar} ]]</td>
+                    <td sec:authorize="hasRole('ROLE_ADMIN')"><a  th:href="@{/editar/} + ${persona.id_persona}">[[ #{accion.editar} ]]</td>
+                    <td sec:authorize="hasRole('ROLE_ADMIN')"><a  th:href="@{/eliminar(id_persona=${persona.id_persona})}">[[ #{accion.eliminar} ]]</td>
                 </tr>
             </table>
         </div>

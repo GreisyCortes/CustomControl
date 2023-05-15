@@ -1,4 +1,5 @@
-<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
     <head>
         <title>Plantilla</title>
         <meta charset="UTF-8">
@@ -13,8 +14,14 @@
                 </br>
                 <a th:href="@{/(lang=es)}">ES</a>
                 <a th:href="@{/(lang=en)}">EN</a>
+                <p th:text="#{plantilla.pie-pagina}"></p><!-- [[#{plantilla.pie-pagina}]]  Asi se puede poner igual para mantener los links sin perder sus propiedades-->
+                <form method="POST" th:action="@{/logout}">
+                    <b>User: </b><span sec:authentication="name">Usuario</span>
+                    <b>Roles: </b><span sec:authentication="principal.authorities">Usuario</span><!-- comment -->
+                    <a href="#" onclick="this.parentNode.submit();">Logout</a>
+                </form>
             </div>
-            <p th:text="#{plantilla.pie-pagina}"></p><!-- [[#{plantilla.pie-pagina}]]  Asi se puede poner igual para mantener los links sin perder sus propiedades-->
+            
         </footer>
     </body>
 </html>
