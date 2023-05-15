@@ -1,21 +1,32 @@
 
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
-    <head>
+    <head th:replace="layout/plantilla :: head">
         <title>Login</title>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
     </head>
-    <body>
-        <h1>Login</h1>
-        <form method="POST" th:action="@{/login}">
-            <label for="username">Username: </label>
-            <input type="text" name="username" id="username"/>
-            </br>
-            <label for="password">Password: </label>
-            <input type="password" name="password" id="password"/>
-            
-            <input type="submit" value="Login"/>
-            
-        </form>
+    <body class="text-center">
+        <main class="form-signin w-100 align-items-center">
+            <h1>Bienvenido</h1>
+            <form method="POST" th:action="@{/login}" class="w-10 text-center">
+              
+
+
+                
+                    <h1 class="h3 mb-3 fw-normal">Por favor de identificarse:</h1>
+
+                    <div class="form-floating  align-items-center col-md-4 mx-auto my-2">
+                        <input class="form-control" type="text" name="username" id="username">
+                            <label for="username">Nombre de usuario: </label>
+                    </div>
+                    <div class="form-floating col-md-4 m-auto">
+                        <input class="form-control" type="password" name="password" id="password">
+                            <label for="password">Contraseña: </label>
+                    </div>
+
+                    <button class="w-10 btn btn-lg btn-primary my-2" type="submit" value="Login">Entrar</button>
+            </form>
+
+        </main>
+
+
     </body>
 </html>

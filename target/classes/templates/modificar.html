@@ -1,35 +1,45 @@
 <!DOCTYPE html>
 
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml">
-    <head>
-        <title>[[#{pagina.titulo.modificar}]]</title>
+    <head th:replace="layout/plantilla :: head">
+        <title >[[#{pagina.titulo.modificar}]]</title>
         <meta charset="UTF-8"/>
-        
+
     </head>
     <body>
         <header th:replace="layout/plantilla :: header"/>
-        <h2>[[#{form.subtitulo}]]</h2>
-        <a th:href="@{/}">[[#{pagina.regresar}]]</a>
-        </br>
-        <form action="#" th:action="@{/guardar}" method="post" th:object="${persona}">
+        <h3>[[#{form.subtitulo}]]</h3>
+        
+        <form action="#" th:action="@{/guardar}" method="post" th:object="${persona}" class="m-4">
             <input type="hidden" name="id_persona" th:field="*{id_persona}">
-            <label for="nombre">Nombre: </label>
-            <input type="text" name="nombre" th:field="*{nombre}"/>
-            <span th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Error campo nombre</span>
-            </br>
-            <label for="apellido">Apellido: </label>
-            <input type="text" name="Apellido" th:field="*{apellido}"/>
-            <span th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}">Error campo apellido</span>
-            </br>
-            <label for="email">Email: </label>
-            <input type="text" name="email" th:field="*{email}"/>
-            <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error campo email</span>
-            </br>
-            <label for="numero">Numero: </label>
-            <input type="tel" name="numero" th:field="*{numero}"/>
-            </br>
-            <input type="submit" name="guardar" th:value="#{accion.guardar}"/>
+
+                <div class="mb-3 col-md-4">
+                    <label class="form-label"for="nombre">Nombre </label>
+                    <input class="form-control " name="nombre" th:field="*{nombre}" />
+                    <span style="color:red;" th:if="${#fields.hasErrors('nombre')}" th:errors="*{nombre}">Error campo nombre</span>
+                </div>
+
+                <div class="mb-3 col-md-4">
+                    <label class="form-label" for="apellido">Apellido: </label>
+                    <input class="form-control " name="apellido" th:field="*{apellido}" />
+                    <span style="color:red;" th:if="${#fields.hasErrors('apellido')}" th:errors="*{apellido}">Error campo apellido</span>
+                </div>
+
+                <div class="mb-3 col-md-4">
+                    <label class="form-label"for="apellido">Email </label>
+                    <input class="form-control " type="text" name="email" th:field="*{email}"/>
+                    <span style="color:red;" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error campo email</span>
+                </div>
+
+                <div class="mb-3 col-md-4">
+                    <label class="form-label"for="numero">Numero </label>
+                    <input class="form-control " type="tel" name="numero" th:field="*{numero}"/>
+                    <span style="color:red;" th:if="${#fields.hasErrors('email')}" th:errors="*{email}">Error campo email</span>
+                </div>
+                <button type="submit" name="guardar" th:value="#{accion.guardar}" class="btn btn-primary">Guardar</button>
+
         </form>
+        <a class="fas fa-arrow-alt-circle-left" th:href="@{/}" style="text-decoration:none; color: black;"> [[#{pagina.regresar}]]</a>
         <footer th:replace="layout/plantilla :: footer"/>
     </body>
 </html>

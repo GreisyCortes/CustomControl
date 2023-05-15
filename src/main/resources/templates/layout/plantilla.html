@@ -1,27 +1,91 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns="http://www.w3.org/1999/xhtml"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
-    <head>
+    <head th:fragment="head">
         <title>Plantilla</title>
         <meta charset="UTF-8">
+            <link rel="stylesheet" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}"/>
+            <link rel="stylesheet" th:href="@{/webjars/font-awesome/css/all.css}"/>
+            <script th:src="@{/webjars/jquery/jquery.min.js}"></script>
+            <script th:src="@{/webjars/popper.js/umd/popper.min.js}"></script>
+            <script th:src="@{/webjars/bootstrap/js/bootstrap.min.js}"></script>
     </head>
     <body>
-        <header th:fragment="header">
-            <h1 th:text="#{plantilla.titulo}"></h1>
+        <header class="p-3 text-bg-dark" th:fragment="header">
+
+
+
+
+
+            <div class="d-flex align-items-center ">
+                <form class="w-100 me-3" role="titulo">
+
+                    <a class="w-40" th:href="@{/}" style="text-decoration:none; color: black; "><h1 th:text="#{plantilla.titulo}" class="h2"></h1></a>
+                </form>
+
+                <div class="flex-shrink-0 dropdown" style="color: burlywood;">
+                    <a href="#" class="fa-solid fa-user d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                        <span sec:authentication="name">Usuario</span>
+                    </a>
+                    <ul class="dropdown-menu text-small shadow" style="color: burlywood;">
+                        <li style="color: burlywood;">
+                            <form method="POST" th:action="@{/logout}">
+                                <a class="dropdown-item" href="#" onclick="this.parentNode.submit();">Salir</a>
+                            </form>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
         </header>
         
+        <div class="modal-dialog" role="document">
+          <div class="modal-content rounded-4 shadow">
+            <div class="modal-header p-5 pb-4 border-bottom-0">
+              <!-- <h1 class="modal-title fs-5" >Modal title</h1> -->
+              <h1 class="fw-bold mb-0 fs-2">Sign up for free</h1>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+
+            <div class="modal-body p-5 pt-0">
+              <form class="">
+                <div class="form-floating mb-3">
+                  <input type="email" class="form-control rounded-3" id="floatingInput" placeholder="name@example.com">
+                  <label for="floatingInput">Email address</label>
+                </div>
+                <div class="form-floating mb-3">
+                  <input type="password" class="form-control rounded-3" id="floatingPassword" placeholder="Password">
+                  <label for="floatingPassword">Password</label>
+                </div>
+                <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Sign up</button>
+                <small class="text-muted">By clicking Sign up, you agree to the terms of use.</small>
+                <hr class="my-4">
+                <h2 class="fs-5 fw-bold mb-3">Or use a third-party</h2>
+                <button class="w-100 py-2 mb-2 btn btn-outline-dark rounded-3" type="submit">
+                  <svg class="bi me-1" width="16" height="16"><use xlink:href="#twitter"></use></svg>
+                  Sign up with Twitter
+                </button>
+                <button class="w-100 py-2 mb-2 btn btn-outline-primary rounded-3" type="submit">
+                  <svg class="bi me-1" width="16" height="16"><use xlink:href="#facebook"></use></svg>
+                  Sign up with Facebook
+                </button>
+                <button class="w-100 py-2 mb-2 btn btn-outline-secondary rounded-3" type="submit">
+                  <svg class="bi me-1" width="16" height="16"><use xlink:href="#github"></use></svg>
+                  Sign up with GitHub
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+
         <footer th:fragment="footer">
             <div>
                 </br>
                 <a th:href="@{/(lang=es)}">ES</a>
                 <a th:href="@{/(lang=en)}">EN</a>
                 <p th:text="#{plantilla.pie-pagina}"></p><!-- [[#{plantilla.pie-pagina}]]  Asi se puede poner igual para mantener los links sin perder sus propiedades-->
-                <form method="POST" th:action="@{/logout}">
-                    <b>User: </b><span sec:authentication="name">Usuario</span>
-                    <b>Roles: </b><span sec:authentication="principal.authorities">Usuario</span><!-- comment -->
-                    <a href="#" onclick="this.parentNode.submit();">Logout</a>
-                </form>
+
             </div>
-            
+
         </footer>
     </body>
 </html>
